@@ -24,10 +24,10 @@ class _HomePageState extends State<HomePage> {
         child: Text("data"),
       ),
       body: Container(
-        child: ListView(
+        child: Column(
           children: <Widget>[
             header(),
-            body(),
+            Expanded(child: body()),
           ],
         ),
       ),
@@ -86,47 +86,151 @@ class _HomePageState extends State<HomePage> {
     "Pune",
   ];
 
-  Widget body() {
+  Widget featuredItems() {
     return Container(
+      height: 200,
+      // color: Colors.red,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(14, 12, 8, 8),
-                  child: Text(
-                    "City",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                Container(
-                  height: 80,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _cities.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            backgroundColor: Colors.grey,
-                            radius: 35,
-                            child: Text(
-                              _cities[index],
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        );
-                      }),
-                )
-              ],
+            height: 150,
+            foregroundDecoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/apt.jpg'),
+                fit: BoxFit.fill,
+              ),
             ),
-            // child: Text("data"),
-          )
+          ),
+          Expanded(
+            child: Container(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Center(
+                        child: Row(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
+                              child: Text(
+                                "Vividus",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Icon(Icons.location_on),
+                                Text("RT Nagar, Bangalore"),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: Center(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Text("Per"),
+                              Text("Day"),
+                            ],
+                          ),
+                          Text(
+                            "Rs. 1000",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget body() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(14, 12, 8, 8),
+                child: Text(
+                  "City",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              Container(
+                height: 80,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _cities.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 35,
+                          child: Text(
+                            _cities[index],
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(14, 12, 8, 8),
+                    child: Text(
+                      "Featured",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      // height: 80,
+                      child: ListView.builder(
+                          itemCount: _cities.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: featuredItems(),
+                            );
+                          }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
