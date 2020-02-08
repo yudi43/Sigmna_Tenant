@@ -68,6 +68,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "flutter_xlider",
+      "rootUri": "file:///Users/yudhishthirsingh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_xlider-3.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "image",
       "rootUri": "file:///Users/yudhishthirsingh/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image-2.1.4",
       "packageUri": "lib/",
@@ -176,7 +182,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-02-08T15:18:39.891282Z",
+  "generated": "2020-02-08T16:06:16.928799Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }

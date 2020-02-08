@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -6,6 +7,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  double _lowerValue = 50;
+  double _lowerValue1 = 1;
+  double _upperValue = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +24,7 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      drawer: Drawer(
-        child: Text("data"),
-      ),
+      drawer: customDrawer(),
       body: Container(
         child: Column(
           children: <Widget>[
@@ -30,6 +32,254 @@ class _HomePageState extends State<HomePage> {
             Expanded(child: body()),
           ],
         ),
+      ),
+    );
+  }
+
+  String dropdownValue = 'One';
+  Widget customDrawer() {
+    return Drawer(
+      child: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xff6ca9eb), Color(0xff0057b5)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+              ),
+              height: 200,
+              width: MediaQuery.of(context).size.width * 0.85,
+              child: Container(
+                child: Center(
+                    child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/person.png"),
+                      radius: 30,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Hi, Samarth",
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "samarth.gupta@gmail.com",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      child: Icon(Icons.keyboard_arrow_right),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                )),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: ListView(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text("Home"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(Icons.filter_list),
+                        SizedBox(width: 30),
+                        DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: Colors.black),
+                          underline: Container(
+                            height: 0.2,
+                            color: Colors.black,
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownValue = newValue;
+                            });
+                          },
+                          items: <String>['One', 'Two', 'Three', 'Four']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Container(
+                  height: 50,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Price in INR"),
+                      // SizedBox(height: 10),
+                      FlutterSlider(
+                        handlerWidth: 15,
+                        hatchMark: FlutterSliderHatchMark(
+                          distanceFromTrackBar: 5,
+                          density: 0.5,
+                          labels: [
+                            FlutterSliderHatchMarkLabel(
+                                percent: 0, label: Text('Start')),
+                            FlutterSliderHatchMarkLabel(
+                                percent: 10, label: Text('10,000')),
+                            FlutterSliderHatchMarkLabel(
+                                percent: 50, label: Text('50 %')),
+                            FlutterSliderHatchMarkLabel(
+                                percent: 80, label: Text('80,000')),
+                            FlutterSliderHatchMarkLabel(
+                                percent: 100, label: Text('Finish')),
+                          ],
+                        ),
+                        jump: true,
+                        trackBar: FlutterSliderTrackBar(),
+                        handler: FlutterSliderHandler(
+                          decoration: BoxDecoration(),
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                        rightHandler: FlutterSliderHandler(
+                          decoration: BoxDecoration(),
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                        values: [30000, 70000],
+                        visibleTouchArea: true,
+                        min: 0,
+                        max: 100000,
+                        touchSize: 15,
+                        rangeSlider: true,
+                        step: 1000,
+                        onDragging: (handlerIndex, lowerValue, upperValue) {},
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 40),
+                Container(
+                  height: 80,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Bedroom"),
+                      FlutterSlider(
+                        jump: true,
+                        values: [10],
+                        fixedValues: [
+                          FlutterSliderFixedValue(percent: 0, value: "1"),
+                          FlutterSliderFixedValue(percent: 10, value: "2"),
+                          FlutterSliderFixedValue(percent: 50, value: "3"),
+                          FlutterSliderFixedValue(percent: 80, value: "4"),
+                          FlutterSliderFixedValue(percent: 100, value: "5"),
+                        ],
+                        onDragging: (handlerIndex, lowerValue, upperValue) {
+                          setState(() {
+                            _lowerValue1 = lowerValue;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 50.0,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    padding: EdgeInsets.all(0.0),
+                    child: Ink(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xff3186de), Color(0xff80abd9)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: Container(
+                        constraints:
+                            BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Apply",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 60),
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text("Become a Host"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.language),
+                  title: Text("Language"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text("Settings"),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
