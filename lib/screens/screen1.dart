@@ -67,7 +67,68 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  List<String> _cities = [
+    "Chennai",
+    "Kota",
+    "BLR",
+    "Jaipur",
+    "Patna",
+    "Kanpur",
+    "Noida",
+    "Delhi",
+    "Kochi",
+    "Indore",
+    "Bhopal",
+    "Mysore",
+    "Jodhpur",
+    "Vizag",
+    "HYD",
+    "Pune",
+  ];
+
   Widget body() {
-    return Container();
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 12, 8, 8),
+                  child: Text(
+                    "City",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(
+                  height: 80,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _cities.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            radius: 35,
+                            child: Text(
+                              _cities[index],
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      }),
+                )
+              ],
+            ),
+            // child: Text("data"),
+          )
+        ],
+      ),
+    );
   }
 }
