@@ -1,18 +1,12 @@
 
 A simple app UI made in Flutter.
-![Alt text](/Users/yudhishthirsingh/Desktop/login.png?raw=true "Title")
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+![login](https://user-images.githubusercontent.com/15618230/74605308-ffa92300-50ec-11ea-896d-481ef204d9c5.png)
 
-A few resources to get you started if this is your first Flutter project:
+![homepage](https://user-images.githubusercontent.com/15618230/74605311-0899f480-50ed-11ea-9a16-ba24da9d6f12.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![drawer](https://user-images.githubusercontent.com/15618230/74605313-0d5ea880-50ed-11ea-82a1-ff0a1e83f801.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 
